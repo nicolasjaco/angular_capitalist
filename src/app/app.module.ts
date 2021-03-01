@@ -13,6 +13,9 @@ import {AngelsUpgradesComponent} from './component/angels-upgrades/angels-upgrad
 import { CashUpgradesComponent } from './component/cash-upgrades/cash-upgrades.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { BigvaluePipe } from './bigvalue.pipe';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,8 @@ import { MatButtonModule } from '@angular/material/button';
     ManagersComponent,
     UnlocksComponent,
     CashUpgradesComponent,
-    AngelsUpgradesComponent
+    AngelsUpgradesComponent,
+    BigvaluePipe
     
   ],
   imports: [
@@ -32,7 +36,9 @@ import { MatButtonModule } from '@angular/material/button';
     HttpClientModule,
     MatToolbarModule,
     MatTabsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatGridListModule,
+    MatProgressBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

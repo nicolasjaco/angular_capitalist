@@ -6,7 +6,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .round {
     width: 100px;
     height: 100px;
-    border-radius: 50%
+    border-radius: 50%;   
    }
 
    .roundtitle {

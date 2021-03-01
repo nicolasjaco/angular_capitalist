@@ -1,14 +1,49 @@
 <mat-toolbar color="primary">
     <span><img class="roundtitle" [attr.src]="server+world.logo" /></span>
     <span id="worldname"> {{world.name}} </span>
-    <span id="worldmoney"> ${{world.money}} </span>
-    <span><button id ="buybtn" mat-raised-button color="accent">Buy</button></span>
+    <span id="worldmoney" [innerHTML]="world.money | bigvalue"></span>
+    <span><button id="buybtn" mat-raised-button color="accent">Buy</button></span>
+
+
 </mat-toolbar>
 
 <mat-tab-group mat-align-tabs="center" backgroundColor="accent">
-    
+
     <mat-tab label="Main">
-        <app-product [prod]="world.products.product[0]" class="product col-md-6"></app-product>
+        <mat-grid-list cols="2" rowHeight="2:1">
+            <mat-grid-tile>
+                <div class="lesdeux">
+                    <div class="lepremier">
+                        <app-product [prod]="world.products.product[0]" class="product col-md-6"></app-product>
+
+                    </div>
+                    <div class="lepremier">
+                        <app-product [prod]="world.products.product[1]" class="product col-md-6"></app-product>
+
+                    </div>
+                    <div class="lepremier">
+                        <app-product [prod]="world.products.product[2]" class="product col-md-6"></app-product>
+
+                    </div>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <div class="lesdeux">
+                    <div class="lepremier">
+                        <app-product [prod]="world.products.product[3]" class="product col-md-6"></app-product>
+
+                    </div>
+                    <div class="lepremier">
+                        <app-product [prod]="world.products.product[4]" class="product col-md-6"></app-product>
+
+                    </div>
+                    <div class="lepremier">
+                        <app-product [prod]="world.products.product[5]" class="product col-md-6"></app-product>
+
+                    </div>
+                </div>
+            </mat-grid-tile>
+        </mat-grid-list>
     </mat-tab>
 
     <mat-tab label="Unlocks">

@@ -1,5 +1,4 @@
-<div class="lesdeux">
-    <div class="lepremier" ><img class="round" [attr.src]="server+world.products.product[0].logo" /></div>
-    <div class="lesecond" ><img class="round" [attr.src]="server+world.products.product[1].logo" /></div>
-    <div class="letroisieme" ><img class="round" [attr.src]="server+world.products.product[2].logo" /></div>
-</div>
+<div><img class="round" [attr.src]="server+product.logo" (click)="startFabrication()"/>
+<mat-progress-bar class="progressbar" [value]="progressbarvalue"></mat-progress-bar></div>
+
+

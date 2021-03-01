@@ -10,3 +10,18 @@
  #buybtn{
     margin: 0px 0px 0px 300px ;
  }
+
+ .lesdeux{
+   position: relative;
+   column-width: auto;
+}
+.ledeuxime{
+   top: 10px;
+}
+
+.letroisieme{
+   top: 10px;
+}
+.progressbar{
+   height: 5 px;
+}
