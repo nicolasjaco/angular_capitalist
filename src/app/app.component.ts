@@ -11,6 +11,7 @@ export class AppComponent {
   title = 'IsisCapitalist';
   world: World = new World();
   server: string;
+  qtmulti:string="X1";
   p:Product=new Product();
 
  constructor(private service: RestserviceService) {
@@ -22,10 +23,29 @@ export class AppComponent {
   }
 
   onProductionDone(p:Product){  
-   this.world.money= this.world.money + p.revenu;
-   this.world.score=this.world.score+p.revenu;
+   this.world.money= this.world.money + p.revenu*p.quantite;
+   this.world.score=this.world.score+p.revenu;     
    console.log(this.world.money);
   }
- 
 
+  onPurchaseDone(cout_total: number){
+    this.world.money -= cout_total;
+    this.world.score -= cout_total;
+  }
+  cycle(){
+    switch(this.qtmulti){
+        case "X1":
+          this.qtmulti="X10";
+          break;
+        case "X10":
+          this.qtmulti="X100";
+          break;
+        case "X100":
+          this.qtmulti="XMAX";
+          break;
+        case  "XMAX":
+          this.qtmulti="X1";
+          break;
+    }
+  }
 }

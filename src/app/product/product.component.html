@@ -1,8 +1,22 @@
-<div>
-    <span id="productname"> {{product.name}} </span>
-    <br>
-    <img class="round" [attr.src]="server+product.logo" (click)="startFabrication()" />    
-    <span id="productprix">Prix: {{product.cout}} </span>
-    <span id="productqt"> Quantité : {{product.quantite}} </span>
+<div class="global">
+<div id="test">
+    <div class="lepremier">
+       <span><img class="round" [attr.src]="server+product.logo" (click)="startFabrication()" /></span>
+    </div>    
+    <div class="letroisieme">
+        <span id="productname"> {{product.name}} </span>
+        <div id="productprix">Prix: {{product.cout| bigvalue}} </div>
+        <div>Quantité: {{product.quantite}} </div>
+        <div class="bouttons" [ngSwitch]="qtemulti">
+            <button mat-raised-button color="accent" class="buybtn" *ngSwitchCase="'X1'" [disabled]="qte_max < 1" (click)="achat()">x 1</button>
+            <button mat-raised-button color="accent" class="buybtn" *ngSwitchCase="'X10'" [disabled]="qte_max < 10" (click)="achat()">x 10</button>
+            <button mat-raised-button color="accent" class="buybtn" *ngSwitchCase="'X100'" [disabled]="qte_max < 100" (click)="achat()">x 100</button>
+            <button mat-raised-button color="accent" class="buybtn" *ngSwitchCase="'XMAX'" [disabled]="qte_max <= 0" (click)="achat()">x {{qte_max}}</button>
+        </div>
+    </div>
+   
+</div>
+<div class="lesecond">
     <mat-progress-bar class="progressbar" [value]="progressbarvalue"></mat-progress-bar>
+</div>
 </div>

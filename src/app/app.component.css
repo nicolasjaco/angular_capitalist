@@ -7,20 +7,25 @@
  }   
 
 
- #buybtn{
+ .buybtn{
     margin: 0px 0px 0px 300px ;
  }
 
+#test{
+   background-image: url('Blackground.png');
+}
  .lesdeux{
    position: relative;
    column-width: auto;
+   grid-row: 200px;
+   margin-top: -400px;
+  
 }
 .ledeuxime{
-   margin-top: 10px;
+   margin-top: 50px;
 }
 
-
-.letroisieme{
+.lepremier{
    top: 10px;
 }
 .progressbar{

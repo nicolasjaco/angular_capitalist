@@ -1,68 +1,86 @@
-<mat-toolbar color="primary">
-    <span><img class="roundtitle" [attr.src]="server+world.logo" /></span>
-    <span id="worldname"> {{world.name}} </span>
-    <span id="worldmoney" [innerHTML]="world.money | bigvalue"></span>
-    <span><button id="buybtn" mat-raised-button color="accent">Buy</button></span>
+<body id="test">
+    <mat-toolbar color="primary">
+        <span><img class="roundtitle" [attr.src]="server+world.logo" /></span>
+        <span id="worldname"> {{world.name}} </span>
+        <span id="worldmoney">Pokédollars: {{world.money| bigvalue}}</span>
+        <span class="buybtn"> Buy : <button mat-raised-button (click)="cycle()">{{qtmulti}}</button> </span>
 
 
-</mat-toolbar>
+    </mat-toolbar>
 
-<mat-tab-group mat-align-tabs="center" backgroundColor="accent">
+    <mat-tab-group mat-align-tabs="center" backgroundColor="accent">
 
-    <mat-tab label="Main">
-        <mat-grid-list cols="2" rowHeight="2:1">
-            <mat-grid-tile>
-                <div class="lesdeux">
-                    <div class="lepremier">
-                        <app-product [prod]="world.products.product[0]" class="product col-md-6" (notifyProduction)="onProductionDone($event)"></app-product>
+        <mat-tab label="Main">
+            <mat-grid-list cols="2">
+                <mat-grid-tile>
+                    <div class="lesdeux">
+                        <div class="lepremier">
+                            <app-product [prod]="world.products.product[0]" class="product col-md-6"
+                                (notifyProduction)="onProductionDone($event)" (notifyPurchase)="onPurchaseDone($event)"
+                                [qtmulti]="qtmulti" [money]="world.money"></app-product>
 
+                        </div>
+
+                        <div class="ledeuxieme">
+                            <app-product [prod]="world.products.product[1]" class="product col-md-6"
+                                (notifyProduction)="onProductionDone($event)" (notifyPurchase)="onPurchaseDone($event)"
+                                [qtmulti]="qtmulti" [money]="world.money"></app-product>
+
+                        </div>
+
+                        <div class="ledeuxieme">
+                            <app-product [prod]="world.products.product[2]" class="product col-md-6"
+                                (notifyProduction)="onProductionDone($event)" (notifyPurchase)="onPurchaseDone($event)"
+                                [qtmulti]="qtmulti" [money]="world.money"></app-product>
+
+                        </div>
                     </div>
-                    <div class="ledeuxieme">
-                        <app-product [prod]="world.products.product[1]" class="product col-md-6" (notifyProduction)="onProductionDone($event)"></app-product>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="lesdeux">
+                        <div class="lepremier">
+                            <app-product [prod]="world.products.product[3]" class="product col-md-6"
+                                (notifyProduction)="onProductionDone($event)" (notifyPurchase)="onPurchaseDone($event)"
+                                [qtmulti]="qtmulti" [money]="world.money"></app-product>
 
+                        </div>
+
+                        <div class="ledeuxieme">
+                            <app-product [prod]="world.products.product[4]" class="product col-md-6"
+                                (notifyProduction)="onProductionDone($event)" (notifyPurchase)="onPurchaseDone($event)"
+                                [qtmulti]="qtmulti" [money]="world.money"></app-product>
+
+                        </div>
+
+                        <div class="ledeuxieme">
+                            <app-product [prod]="world.products.product[5]" class="product col-md-6"
+                                (notifyProduction)="onProductionDone($event)" (notifyPurchase)="onPurchaseDone($event)"
+                                [qtmulti]="qtmulti" [money]="world.money"></app-product>
+
+                        </div>
                     </div>
-                    <div class="ledeuxieme">
-                        <app-product [prod]="world.products.product[2]" class="product col-md-6" (notifyProduction)="onProductionDone($event)"></app-product>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </mat-tab>
 
-                    </div>
-                </div>
-            </mat-grid-tile>
-            <mat-grid-tile>
-                <div class="lesdeux">
-                    <div class="lepremier">
-                        <app-product [prod]="world.products.product[3]" class="product col-md-6" (notifyProduction)="onProductionDone($event)"></app-product>
+        <mat-tab label="Unlocks">
+            <app-unlocks></app-unlocks>
+        </mat-tab>
 
-                    </div>
-                    <div class="ledeuxieme">
-                        <app-product [prod]="world.products.product[4]" class="product col-md-6" (notifyProduction)="onProductionDone($event)"></app-product>
+        <mat-tab label="Cash Updates">
+            <app-cash-upgrades></app-cash-upgrades>
+        </mat-tab>
 
-                    </div>
-                    <div class="ledeuxieme">
-                        <app-product [prod]="world.products.product[5]" class="product col-md-6" (notifyProduction)="onProductionDone($event)"></app-product>
+        <mat-tab label="Angels Upgrades">
+            <app-angels-upgrades></app-angels-upgrades>
+        </mat-tab>
 
-                    </div>
-                </div>
-            </mat-grid-tile>
-        </mat-grid-list>
-    </mat-tab>
+        <mat-tab label="Managers">
+            <app-managers></app-managers>
+        </mat-tab>
 
-    <mat-tab label="Unlocks">
-        <app-unlocks></app-unlocks>
-    </mat-tab>
-
-    <mat-tab label="Cash Updates">
-        <app-cash-upgrades></app-cash-upgrades>
-    </mat-tab>
-
-    <mat-tab label="Angels Upgrades">
-        <app-angels-upgrades></app-angels-upgrades>
-    </mat-tab>
-
-    <mat-tab label="Managers">
-        <app-managers></app-managers>
-    </mat-tab>
-
-    <mat-tab label="Investors">
-        <app-investors></app-investors>
-    </mat-tab>
-</mat-tab-group>
+        <mat-tab label="Investors">
+            <app-investors></app-investors>
+        </mat-tab>
+    </mat-tab-group>
+</body>
