@@ -38,12 +38,12 @@ export class ProductComponent implements OnInit {
   @Input()
   set qtmulti(value: string) {
     this.qtemulti = value;
-    if (this.qtemulti && this.product) this.MaxAchat();
+    if (this.qtemulti && this.product) this.calcMaxCanBuy();
   }
   @Input()
   set money(value: number) {
     this.argent = value;    
-    if (this.argent && this.product) this.MaxAchat();
+    if (this.argent && this.product) this.calcMaxCanBuy();
   }
 
 
@@ -75,7 +75,7 @@ export class ProductComponent implements OnInit {
     }
 
   }
-  MaxAchat() {   
+  calcMaxCanBuy() {   
     let qtemax = ((Math.log(1 - ((this.argent * (1 - this.product.croissance)) / this.product.cout)) / Math.log(this.product.croissance)));
     if (qtemax < 0) {
       this.qte_max = 0;
