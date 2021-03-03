@@ -11,6 +11,7 @@ export class AppComponent {
   title = 'IsisCapitalist';
   world: World = new World();
   server: string;
+  p:Product=new Product();
 
  constructor(private service: RestserviceService) {
   this.server = service.getServer();
@@ -18,6 +19,12 @@ export class AppComponent {
   world => {
   this.world = world;
   });
+  }
+
+  onProductionDone(p:Product){  
+   this.world.money= this.world.money + p.revenu;
+   this.world.score=this.world.score+p.revenu;
+   console.log(this.world.money);
   }
  
 

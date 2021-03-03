@@ -14,15 +14,15 @@
             <mat-grid-tile>
                 <div class="lesdeux">
                     <div class="lepremier">
-                        <app-product [prod]="world.products.product[0]" class="product col-md-6"></app-product>
+                        <app-product [prod]="world.products.product[0]" class="product col-md-6" (notifyProduction)="onProductionDone($event)"></app-product>
 
                     </div>
-                    <div class="lepremier">
-                        <app-product [prod]="world.products.product[1]" class="product col-md-6"></app-product>
+                    <div class="ledeuxieme">
+                        <app-product [prod]="world.products.product[1]" class="product col-md-6" (notifyProduction)="onProductionDone($event)"></app-product>
 
                     </div>
-                    <div class="lepremier">
-                        <app-product [prod]="world.products.product[2]" class="product col-md-6"></app-product>
+                    <div class="ledeuxieme">
+                        <app-product [prod]="world.products.product[2]" class="product col-md-6" (notifyProduction)="onProductionDone($event)"></app-product>
 
                     </div>
                 </div>
@@ -30,15 +30,15 @@
             <mat-grid-tile>
                 <div class="lesdeux">
                     <div class="lepremier">
-                        <app-product [prod]="world.products.product[3]" class="product col-md-6"></app-product>
+                        <app-product [prod]="world.products.product[3]" class="product col-md-6" (notifyProduction)="onProductionDone($event)"></app-product>
 
                     </div>
-                    <div class="lepremier">
-                        <app-product [prod]="world.products.product[4]" class="product col-md-6"></app-product>
+                    <div class="ledeuxieme">
+                        <app-product [prod]="world.products.product[4]" class="product col-md-6" (notifyProduction)="onProductionDone($event)"></app-product>
 
                     </div>
-                    <div class="lepremier">
-                        <app-product [prod]="world.products.product[5]" class="product col-md-6"></app-product>
+                    <div class="ledeuxieme">
+                        <app-product [prod]="world.products.product[5]" class="product col-md-6" (notifyProduction)="onProductionDone($event)"></app-product>
 
                     </div>
                 </div>

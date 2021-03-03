@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { World, Pallier, Product } from '../world';
 import { RestserviceService } from '../restservice.service';
 
@@ -12,6 +12,8 @@ export class ProductComponent implements OnInit {
   server: string;
   product: Product = new Product();
   progressbarvalue: number = 0;
+
+  lastupdate: number = 0;
 
   constructor(private service: RestserviceService) {
     this.server = service.getServer();
@@ -27,17 +29,31 @@ export class ProductComponent implements OnInit {
     this.product = value;
   }
 
+  @Output() notifyProduction: EventEmitter<Product> = new EventEmitter<Product>();
+
+
   startFabrication() {
-    if (this.progressbarvalue < 100) {
-      while (this.progressbarvalue < 100) {
-        this.progressbarvalue += 1;;
-      }
-    } else {
-      this.progressbarvalue = 0;
-    }
+    this.product.timeleft = this.product.vitesse;
+    this.lastupdate = Date.now();
+
   }
 
-  calcScore() { }
+  calcScore() {
+    if (this.product.timeleft != 0) {
+      let temps = Date.now() - this.lastupdate;
+      this.lastupdate = Date.now();
+      this.product.timeleft = this.product.timeleft - temps;
+      if (this.product.timeleft <= 0) {
+        this.product.timeleft = 0;
+        this.progressbarvalue = 0;
+        this.notifyProduction.emit(this.product);
+      } else {
+        this.progressbarvalue = ((this.product.vitesse - this.product.timeleft) / this.product.vitesse) * 100;
+      }
+
+    }
+
+  }
 
 
 }

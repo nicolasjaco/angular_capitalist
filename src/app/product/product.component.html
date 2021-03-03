@@ -1,4 +1,8 @@
-<div><img class="round" [attr.src]="server+product.logo" (click)="startFabrication()"/>
-<mat-progress-bar class="progressbar" [value]="progressbarvalue"></mat-progress-bar></div>
-
-
+<div>
+    <span id="productname"> {{product.name}} </span>
+    <br>
+    <img class="round" [attr.src]="server+product.logo" (click)="startFabrication()" />    
+    <span id="productprix">Prix: {{product.cout}} </span>
+    <span id="productqt"> Quantité : {{product.quantite}} </span>
+    <mat-progress-bar class="progressbar" [value]="progressbarvalue"></mat-progress-bar>
+</div>
