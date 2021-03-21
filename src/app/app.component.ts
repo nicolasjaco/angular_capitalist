@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { RestserviceService } from './restservice.service';
 import { World, Product, Pallier } from './world';
 
@@ -14,24 +15,27 @@ export class AppComponent {
   qtmulti:string="X1";
   p:Product=new Product();
   showManagers=false;
+  badgeManagers=0;
 
- constructor(private service: RestserviceService) {
+ constructor(private service: RestserviceService, private snackBar: MatSnackBar) {
   this.server = service.getServer();
   service.getWorld().then(
   world => {
   this.world = world;
+  this.badge();
   });
   }
 
   onProductionDone(p:Product){  
    this.world.money= this.world.money + p.revenu*p.quantite;
    this.world.score=this.world.score+p.revenu;     
-   console.log(this.world.money);
+   this.badge();
   }
 
   onPurchaseDone(cout_total: number){
     this.world.money -= cout_total;
     this.world.score -= cout_total;
+    this.badge();
   }
   cycle(){
     switch(this.qtmulti){
@@ -50,10 +54,23 @@ export class AppComponent {
     }
   }
   hireManager(manager:Pallier){
-    if (this.world.money >= manager.seuil && this.world.products.product[manager.idcible].quantite>0){
-      this.world.products.product[manager.idcible].managerUnlocked = true;
+    if (this.world.money >= manager.seuil && this.world.products.product[manager.idcible-1].quantite>0){
+      this.world.products.product[manager.idcible-1].managerUnlocked = true;
       manager.unlocked = true;
       this.world.money -= manager.seuil;
+      this.popMessage("Vous venez d'engager "+manager.name);
     }
   }
+  popMessage(message : string) : void {
+    this.snackBar.open(message, "", { duration : 2000 })
+    }
+
+    badge(){
+      this.badgeManagers=0;
+      for (let manager of this.world.managers.pallier){
+          if (manager.seuil <= this.world.money && this.world.products.product[manager.idcible-1].quantite>0){
+            this.badgeManagers++;
+          }
+      }
+    }
 }

@@ -4,7 +4,7 @@
         <span id="worldname"> {{world.name}} </span>
         <span id="worldmoney">Pokédollars: {{world.money| bigvalue}}</span>
         <span class="buybtn"> Buy : <button mat-raised-button (click)="cycle()">{{qtmulti}}</button> </span>
-        <span class="buybtn"><button mat-raised-button class="boutonManager" (click)="showManagers = !showManagers">Managers</button></span>
+        <span><button mat-raised-button color="accent" [matBadge]="badgeManagers" [matBadgeHidden]="badgeManagers==0" (click)="showManagers = !showManagers">Managers</button></span>
     </mat-toolbar>
 
     <mat-grid-list cols="2">
@@ -42,11 +42,11 @@
                                 </div>
                                 <div>
                                     <div class="managername"> {{ manager.name}} </div>
-                                    <div class="managercible"> {{ world.products.product[manager.idcible].name }} </div>
+                                    <div class="managercible"> {{ world.products.product[manager.idcible-1].name }} </div>
                                     <div class="managercost"> {{ manager.seuil}} </div>
                                 </div>
                                 <div>
-                                    <div class="buybtn"><button mat-raised-button class="hirebutton" (click)="hireManager(manager)"
+                                    <div class="buybtn"><button mat-raised-button color="accent" class="hirebutton" (click)="hireManager(manager)"
                                         [ngClass]="{'selectable' : (world.money >= manager.seuil)}">Hire !</button></div>
                                 </div>
                             </div>

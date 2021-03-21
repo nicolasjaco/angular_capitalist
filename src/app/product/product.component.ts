@@ -59,6 +59,10 @@ export class ProductComponent implements OnInit {
   }
 
   calcScore() {
+    if(this.product.managerUnlocked ==true && this.product.timeleft==0){
+      this.startFabrication();
+    }
+    console.log(this.product.managerUnlocked)
     if (this.product.timeleft != 0) {
       let temps = Date.now() - this.lastupdate;
       this.lastupdate = Date.now();
