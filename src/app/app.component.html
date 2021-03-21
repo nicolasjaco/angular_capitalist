@@ -1,87 +1,83 @@
-<body id="test">
-    <audio preload="auto" loop autoplay="autoplay"><source src="./assets/Opening 2- Nanatsu No Taizai - Man With A Mission.mp3" type="audio/mpeg"></audio>
+<body id="test">  
     <mat-toolbar color="primary">
         <span><img class="roundtitle" [attr.src]="server+world.logo" /></span>
         <span id="worldname"> {{world.name}} </span>
         <span id="worldmoney">Pokédollars: {{world.money| bigvalue}}</span>
         <span class="buybtn"> Buy : <button mat-raised-button (click)="cycle()">{{qtmulti}}</button> </span>
-
-
+        <span class="buybtn"><button mat-raised-button class="boutonManager" (click)="showManagers = !showManagers">Managers</button></span>
     </mat-toolbar>
 
-    <mat-tab-group mat-align-tabs="center" backgroundColor="accent">
+    <mat-grid-list cols="2">
+        <mat-grid-tile>
+            <div class="lesdeux">
+                <div class="lepremier">
+                    <app-product [prod]="world.products.product[0]" class="product col-md-6"
+                        (notifyProduction)="onProductionDone($event)" (notifyPurchase)="onPurchaseDone($event)"
+                        [qtmulti]="qtmulti" [money]="world.money"></app-product>
 
-        <mat-tab label="Main">
-            <mat-grid-list cols="2">
-                <mat-grid-tile>
-                    <div class="lesdeux">
-                        <div class="lepremier">
-                            <app-product [prod]="world.products.product[0]" class="product col-md-6"
-                                (notifyProduction)="onProductionDone($event)" (notifyPurchase)="onPurchaseDone($event)"
-                                [qtmulti]="qtmulti" [money]="world.money"></app-product>
+                </div>
 
-                        </div>
+                <div class="ledeuxieme">
+                    <app-product [prod]="world.products.product[1]" class="product col-md-6"
+                        (notifyProduction)="onProductionDone($event)" (notifyPurchase)="onPurchaseDone($event)"
+                        [qtmulti]="qtmulti" [money]="world.money"></app-product>
 
-                        <div class="ledeuxieme">
-                            <app-product [prod]="world.products.product[1]" class="product col-md-6"
-                                (notifyProduction)="onProductionDone($event)" (notifyPurchase)="onPurchaseDone($event)"
-                                [qtmulti]="qtmulti" [money]="world.money"></app-product>
+                </div>
 
-                        </div>
+                <div class="ledeuxieme">
+                    <app-product [prod]="world.products.product[2]" class="product col-md-6"
+                        (notifyProduction)="onProductionDone($event)" (notifyPurchase)="onPurchaseDone($event)"
+                        [qtmulti]="qtmulti" [money]="world.money"></app-product>
 
-                        <div class="ledeuxieme">
-                            <app-product [prod]="world.products.product[2]" class="product col-md-6"
-                                (notifyProduction)="onProductionDone($event)" (notifyPurchase)="onPurchaseDone($event)"
-                                [qtmulti]="qtmulti" [money]="world.money"></app-product>
-
-                        </div>
+                </div>
+                <div *ngIf="showManagers" class="modal">
+                    <div>
+                        <h1 class="title">Managers make you feel better !</h1>
                     </div>
-                </mat-grid-tile>
-                <mat-grid-tile>
-                    <div class="lesdeux">
-                        <div class="lepremier">
-                            <app-product [prod]="world.products.product[3]" class="product col-md-6"
-                                (notifyProduction)="onProductionDone($event)" (notifyPurchase)="onPurchaseDone($event)"
-                                [qtmulti]="qtmulti" [money]="world.money"></app-product>
-
+                    <div>
+                        <div *ngFor="let manager of world.managers.pallier">
+                            <div *ngIf="!manager.unlocked" class="managerslayout">
+                                <div>
+                                    <div class="logo"><img class="round" [attr.src]="server+manager.logo" /> </div>
+                                </div>
+                                <div>
+                                    <div class="managername"> {{ manager.name}} </div>
+                                    <div class="managercible"> {{ world.products.product[manager.idcible].name }} </div>
+                                    <div class="managercost"> {{ manager.seuil}} </div>
+                                </div>
+                                <div>
+                                    <div class="buybtn"><button mat-raised-button class="hirebutton" (click)="hireManager(manager)"
+                                        [ngClass]="{'selectable' : (world.money >= manager.seuil)}">Hire !</button></div>
+                                </div>
+                            </div>
                         </div>
-
-                        <div class="ledeuxieme">
-                            <app-product [prod]="world.products.product[4]" class="product col-md-6"
-                                (notifyProduction)="onProductionDone($event)" (notifyPurchase)="onPurchaseDone($event)"
-                                [qtmulti]="qtmulti" [money]="world.money"></app-product>
-
-                        </div>
-
-                        <div class="ledeuxieme">
-                            <app-product [prod]="world.products.product[5]" class="product col-md-6"
-                                (notifyProduction)="onProductionDone($event)" (notifyPurchase)="onPurchaseDone($event)"
-                                [qtmulti]="qtmulti" [money]="world.money"></app-product>
-
-                        </div>
+                        <button class="closebutton" mat-raisedbutton color="primary"
+                            (click)="showManagers = !showManagers">Close</button>
                     </div>
-                </mat-grid-tile>
-            </mat-grid-list>
-        </mat-tab>
+                </div>
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <div class="lesdeux">
+                <div class="lepremier">
+                    <app-product [prod]="world.products.product[3]" class="product col-md-6"
+                        (notifyProduction)="onProductionDone($event)" (notifyPurchase)="onPurchaseDone($event)"
+                        [qtmulti]="qtmulti" [money]="world.money"></app-product>
+                </div>
 
-        <mat-tab label="Unlocks">
-            <app-unlocks></app-unlocks>
-        </mat-tab>
+                <div class="ledeuxieme">
+                    <app-product [prod]="world.products.product[4]" class="product col-md-6"
+                        (notifyProduction)="onProductionDone($event)" (notifyPurchase)="onPurchaseDone($event)"
+                        [qtmulti]="qtmulti" [money]="world.money"></app-product>
 
-        <mat-tab label="Cash Updates">
-            <app-cash-upgrades></app-cash-upgrades>
-        </mat-tab>
+                </div>
 
-        <mat-tab label="Angels Upgrades">
-            <app-angels-upgrades></app-angels-upgrades>
-        </mat-tab>
-
-        <mat-tab label="Managers">
-            <app-managers></app-managers>
-        </mat-tab>
-
-        <mat-tab label="Investors">
-            <app-investors></app-investors>
-        </mat-tab>
-    </mat-tab-group>
+                <div class="ledeuxieme">
+                    <app-product [prod]="world.products.product[5]" class="product col-md-6"
+                        (notifyProduction)="onProductionDone($event)" (notifyPurchase)="onPurchaseDone($event)"
+                        [qtmulti]="qtmulti" [money]="world.money"></app-product>
+                </div>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>  
 </body>

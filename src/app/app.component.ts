@@ -13,6 +13,7 @@ export class AppComponent {
   server: string;
   qtmulti:string="X1";
   p:Product=new Product();
+  showManagers=false;
 
  constructor(private service: RestserviceService) {
   this.server = service.getServer();
@@ -46,6 +47,13 @@ export class AppComponent {
         case  "XMAX":
           this.qtmulti="X1";
           break;
+    }
+  }
+  hireManager(manager:Pallier){
+    if (this.world.money >= manager.seuil && this.world.products.product[manager.idcible].quantite>0){
+      this.world.products.product[manager.idcible].managerUnlocked = true;
+      manager.unlocked = true;
+      this.world.money -= manager.seuil;
     }
   }
 }
