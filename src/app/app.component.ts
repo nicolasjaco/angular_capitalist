@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+//import { timeStamp } from 'console';
 import { RestserviceService } from './restservice.service';
 import { World, Product, Pallier } from './world';
 
@@ -12,65 +13,87 @@ export class AppComponent {
   title = 'IsisCapitalist';
   world: World = new World();
   server: string;
-  qtmulti:string="X1";
-  p:Product=new Product();
-  showManagers=false;
-  badgeManagers=0;
+  qtmulti: string = "X1";
+  p: Product = new Product();
+  showManagers = false;
+  badgeManagers = 0;
+  username : string="Capitain";
 
- constructor(private service: RestserviceService, private snackBar: MatSnackBar) {
-  this.server = service.getServer();
-  service.getWorld().then(
-  world => {
-  this.world = world;
-  this.badge();
-  });
+
+  constructor(private service: RestserviceService, private snackBar: MatSnackBar) {
+    this.server = service.getServer();    
+    var toto="Capitain"+ Math.floor(Math.random() * 10000).toString();    
+    localStorage.setItem("username", toto);   
+    this.username=toto;
+    this.service.setUser(this.username);     
+    console.log("dans construteur");
+    console.log(this.username);
+    console.log(localStorage.getItem("username"));
+    console.log(this.service.getUser())    
+    service.getWorld().then(
+      world => {
+        this.world = world;
+        this.badge();     
+      });     
+  }  
+
+  onProductionDone(p: Product) {
+    this.world.money = this.world.money + p.revenu * p.quantite;
+    this.world.score = this.world.score + p.revenu;
+    this.badge();
   }
 
-  onProductionDone(p:Product){  
-   this.world.money= this.world.money + p.revenu*p.quantite;
-   this.world.score=this.world.score+p.revenu;     
-   this.badge();
-  }
-
-  onPurchaseDone(cout_total: number){
+  onPurchaseDone(cout_total: number) {
     this.world.money -= cout_total;
     this.world.score -= cout_total;
     this.badge();
   }
-  cycle(){
-    switch(this.qtmulti){
-        case "X1":
-          this.qtmulti="X10";
-          break;
-        case "X10":
-          this.qtmulti="X100";
-          break;
-        case "X100":
-          this.qtmulti="XMAX";
-          break;
-        case  "XMAX":
-          this.qtmulti="X1";
-          break;
+  cycle() {
+    switch (this.qtmulti) {
+      case "X1":
+        this.qtmulti = "X10";
+        break;
+      case "X10":
+        this.qtmulti = "X100";
+        break;
+      case "X100":
+        this.qtmulti = "XMAX";
+        break;
+      case "XMAX":
+        this.qtmulti = "X1";
+        break;
     }
   }
-  hireManager(manager:Pallier){
-    if (this.world.money >= manager.seuil && this.world.products.product[manager.idcible-1].quantite>0){
-      this.world.products.product[manager.idcible-1].managerUnlocked = true;
+  hireManager(manager: Pallier) {
+    if (this.world.money >= manager.seuil && this.world.products.product[manager.idcible - 1].quantite > 0) {
+      this.world.products.product[manager.idcible - 1].managerUnlocked = true;
       manager.unlocked = true;
       this.world.money -= manager.seuil;
-      this.popMessage("Vous venez d'engager "+manager.name);
+      this.popMessage("Vous venez d'engager " + manager.name);
     }
   }
-  popMessage(message : string) : void {
-    this.snackBar.open(message, "", { duration : 2000 })
-    }
+  popMessage(message: string): void {
+    this.snackBar.open(message, "", { duration: 2000 })
+  }
 
-    badge(){
-      this.badgeManagers=0;
-      for (let manager of this.world.managers.pallier){
-          if (manager.seuil <= this.world.money && this.world.products.product[manager.idcible-1].quantite>0){
-            this.badgeManagers++;
-          }
+  badge() {
+    this.badgeManagers = 0;
+    for (let manager of this.world.managers.pallier) {
+      if (manager.seuil <= this.world.money && this.world.products.product[manager.idcible - 1].quantite > 0) {
+        this.badgeManagers++;
       }
     }
+  }
+
+  onUsernameChanged(){    
+    this.service.setUser(this.username);   
+    localStorage.setItem("username", this.username);      
+    console.log("je suis dans onUser")
+    console.log(localStorage.getItem("username"))   
+    this.service.getWorld().then(
+      world => {
+        this.world = world;
+        this.badge();     
+      });     
+  }
 }

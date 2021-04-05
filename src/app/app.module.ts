@@ -13,6 +13,9 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { BigvaluePipe } from './bigvalue.pipe';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatInputModule} from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -32,7 +35,10 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatGridListModule,
     MatProgressBarModule,
     MatSnackBarModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatInputModule,
+    FormsModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
