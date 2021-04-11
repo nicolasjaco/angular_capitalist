@@ -17,12 +17,12 @@ export class AppComponent {
   p: Product = new Product();
   showManagers = false;
   badgeManagers = 0;
-  username : string="Capitain";
+  username : string="Dresseur";
 
 
   constructor(private service: RestserviceService, private snackBar: MatSnackBar) {
     this.server = service.getServer();    
-    var toto="Capitain"+ Math.floor(Math.random() * 10000).toString();    
+    var toto="Dresseur"+ Math.floor(Math.random() * 10000).toString();    
     localStorage.setItem("username", toto);   
     this.username=toto;
     this.service.setUser(this.username);     
